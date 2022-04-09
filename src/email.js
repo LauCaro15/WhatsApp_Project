@@ -1,8 +1,6 @@
 require('dotenv').config();
-
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 function sendEmailConfirmationHTML(customerName, orderNro) {
   return `<!DOCTYPE html>
   <html lang="en">
@@ -22,7 +20,6 @@ function sendEmailConfirmationHTML(customerName, orderNro) {
   </body>
   </html>`;
 }
-
 function getMessage(emailParams) {
   return {
     to: emailParams.toEmail,
@@ -35,7 +32,6 @@ function getMessage(emailParams) {
     ),
   };
 }
-
 async function sendOrder(emailParams) {
   try {
     await sgMail.send(getMessage(emailParams));
@@ -48,7 +44,6 @@ async function sendOrder(emailParams) {
     return { message };
   }
 }
-
 module.exports = {
   sendOrder,
 };
